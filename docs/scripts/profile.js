@@ -54,7 +54,7 @@ async function fetchUserProfile(token, userId) {
         // Utilise l'API mockée si disponible, sinon l'API réelle
         const res = window.MOCK_MODE
             ? await window.MockAPI.getUserProfile(token, userId)
-            : await fetch(`http://127.0.0.1:5000/api/v1/users/${userId}`, {
+            : await fetch(`${window.API_BASE_URL}/api/v1/users/${userId}`, {
                 headers: { "Authorization": "Bearer " + token }
               });
         
@@ -82,7 +82,7 @@ async function saveProfile(token, userId) {
         // Utilise l'API mockée si disponible, sinon l'API réelle
         const res = window.MOCK_MODE
             ? await window.MockAPI.updateUserProfile(token, userId, data)
-            : await fetch(`http://127.0.0.1:5000/api/v1/users/${userId}`, {
+            : await fetch(`${window.API_BASE_URL}/api/v1/users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     "Authorization": "Bearer " + token,

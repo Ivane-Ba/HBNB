@@ -61,7 +61,7 @@ async function fetchUserName() {
         // Utilise l'API mockée si disponible, sinon l'API réelle
         const res = window.MOCK_MODE
             ? await window.MockAPI.getMe(token)
-            : await fetch("http://127.0.0.1:5000/api/v1/auth/me", {
+            : await fetch(`${window.API_BASE_URL}/api/v1/auth/me`, {
                 headers: { Authorization: "Bearer " + token }
               });
         
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Utilise l'API mockée si disponible, sinon l'API réelle
                 const response = window.MOCK_MODE
                     ? await window.MockAPI.login(email, password)
-                    : await fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+                    : await fetch(`${window.API_BASE_URL}/api/v1/auth/login`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

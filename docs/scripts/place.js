@@ -46,7 +46,7 @@ async function fetchAndDisplayPlaceAndReviews(token, placeId) {
         // Utilise l'API mockée si disponible, sinon l'API réelle
         const res = window.MOCK_MODE
             ? await window.MockAPI.getPlace(placeId)
-            : await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, { 
+            : await fetch(`${window.API_BASE_URL}/api/v1/places/${placeId}`, { 
                 headers: token ? {'Authorization': 'Bearer ' + token} : {}
               });
         
@@ -58,7 +58,7 @@ async function fetchAndDisplayPlaceAndReviews(token, placeId) {
         // Utilise l'API mockée si disponible, sinon l'API réelle
         const res = window.MOCK_MODE
             ? await window.MockAPI.getReviewsByPlace(placeId)
-            : await fetch(`http://127.0.0.1:5000/api/v1/reviews/by_place/${placeId}`, { 
+            : await fetch(`${window.API_BASE_URL}/api/v1/reviews/by_place/${placeId}`, { 
                 headers: token ? {'Authorization': 'Bearer ' + token} : {}
               });
         
@@ -195,7 +195,7 @@ function displayPlaceDetails(place, reviews) {
         // Utilise l'API mockée si disponible, sinon l'API réelle
         const res = window.MOCK_MODE
             ? await window.MockAPI.addReview(token, data)
-            : await fetch(`http://127.0.0.1:5000/api/v1/reviews/`, {
+            : await fetch(`${window.API_BASE_URL}/api/v1/reviews/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

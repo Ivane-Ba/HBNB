@@ -120,7 +120,7 @@ async function fetchPlaces() {
     // Utilise l'API mockée si disponible, sinon l'API réelle
     const res = window.MOCK_MODE 
       ? await window.MockAPI.getPlaces()
-      : await fetch('http://127.0.0.1:5000/api/v1/places/', { 
+      : await fetch(`${window.API_BASE_URL}/api/v1/places/`, { 
           headers: token ? {'Authorization': 'Bearer ' + token} : {}
         });
     
