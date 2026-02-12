@@ -51,9 +51,13 @@ function parseJwt(token) {
 // GET profil actuel
 async function fetchUserProfile(token, userId) {
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/v1/users/${userId}`, {
-            headers: { "Authorization": "Bearer " + token }
-        });
+        // Utilise l'API mockée si disponible, sinon l'API réelle
+        const res = window.MOCK_MODE
+            ? await window.MockAPI.getUserProfile(token, userId)
+            : await fetch(`http://127.0.0.1:5000/api/v1/users/${userId}`, {
+                headers: { "Authorization": "Bearer " + token }
+              });
+        
         if (res.ok) {
             const user = await res.json();
             document.getElementById('first_name').value = user.first_name || '';
@@ -75,14 +79,18 @@ async function saveProfile(token, userId) {
     const data = { first_name, last_name };
     showMsg("Saving...", false);
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/v1/users/${userId}`, {
-            method: 'PUT',
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+        // Utilise l'API mockée si disponible, sinon l'API réelle
+        const res = window.MOCK_MODE
+            ? await window.MockAPI.updateUserProfile(token, userId, data)
+            : await fetch(`http://127.0.0.1:5000/api/v1/users/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+              });
+        
         if (res.ok) {
             showMsg("Profile updated!", false, true);
         } else {

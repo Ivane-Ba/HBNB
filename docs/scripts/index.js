@@ -116,10 +116,14 @@ sliderReset.addEventListener('click', () => {
 // Récupère les places depuis l'API
 async function fetchPlaces() {
   const token = window.getTokenFromCookie ? window.getTokenFromCookie() : null;
-  let headers = {};
-  if (token) headers['Authorization'] = 'Bearer ' + token;
   try {
-    const res = await fetch('http://127.0.0.1:5000/api/v1/places/', { headers });
+    // Utilise l'API mockée si disponible, sinon l'API réelle
+    const res = window.MOCK_MODE 
+      ? await window.MockAPI.getPlaces()
+      : await fetch('http://127.0.0.1:5000/api/v1/places/', { 
+          headers: token ? {'Authorization': 'Bearer ' + token} : {}
+        });
+    
     if (!res.ok) {
       document.querySelector('.places-container').innerHTML = "Erreur API";
       return;

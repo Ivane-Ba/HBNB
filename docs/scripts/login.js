@@ -58,9 +58,13 @@ async function fetchUserName() {
     const token = getTokenFromCookie();
     if (!token) return null;
     try {
-        const res = await fetch("http://127.0.0.1:5000/api/v1/auth/me", {
-            headers: { Authorization: "Bearer " + token }
-        });
+        // Utilise l'API mockée si disponible, sinon l'API réelle
+        const res = window.MOCK_MODE
+            ? await window.MockAPI.getMe(token)
+            : await fetch("http://127.0.0.1:5000/api/v1/auth/me", {
+                headers: { Authorization: "Bearer " + token }
+              });
+        
         if (res.status === 401) {
             // Token expiré ou invalide
             forceLogoutWithMessage("Session expirée. Merci de vous reconnecter.");
@@ -167,13 +171,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = emailInput ? emailInput.value.trim() : "";
             const password = loginForm.password.value;
             try {
-                const response = await fetch('http://127.0.0.1:5000/api/v1/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+                // Utilise l'API mockée si disponible, sinon l'API réelle
+                const response = window.MOCK_MODE
+                    ? await window.MockAPI.login(email, password)
+                    : await fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password })
+                      });
 
                 if (response.ok) {
                     const data = await response.json();

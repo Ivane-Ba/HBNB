@@ -41,18 +41,27 @@ function showReviewError(msg) {
 
 // Fetch et rendu
 async function fetchAndDisplayPlaceAndReviews(token, placeId) {
-    const headers = {};
-    if (token) headers['Authorization'] = 'Bearer ' + token;
-
     let place = null, reviews = [];
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, { headers });
+        // Utilise l'API mockée si disponible, sinon l'API réelle
+        const res = window.MOCK_MODE
+            ? await window.MockAPI.getPlace(placeId)
+            : await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, { 
+                headers: token ? {'Authorization': 'Bearer ' + token} : {}
+              });
+        
         if (!res.ok) throw new Error("not found");
         place = await res.json();
     } catch { document.getElementById('place-details').innerHTML = '<div style="color:#f55;">Erreur chargement lieu.</div>'; return; }
 
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/v1/reviews/by_place/${placeId}`, { headers });
+        // Utilise l'API mockée si disponible, sinon l'API réelle
+        const res = window.MOCK_MODE
+            ? await window.MockAPI.getReviewsByPlace(placeId)
+            : await fetch(`http://127.0.0.1:5000/api/v1/reviews/by_place/${placeId}`, { 
+                headers: token ? {'Authorization': 'Bearer ' + token} : {}
+              });
+        
         reviews = res.ok ? await res.json() : [];
     } catch { reviews = []; }
 
@@ -182,14 +191,19 @@ function displayPlaceDetails(place, reviews) {
         place_id: getPlaceIdFromURL()
     };
     try {
-        const res = await fetch(`http://127.0.0.1:5000/api/v1/reviews/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + getTokenFromCookie()
-            },
-            body: JSON.stringify(data)
-        });
+        const token = getTokenFromCookie();
+        // Utilise l'API mockée si disponible, sinon l'API réelle
+        const res = window.MOCK_MODE
+            ? await window.MockAPI.addReview(token, data)
+            : await fetch(`http://127.0.0.1:5000/api/v1/reviews/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(data)
+              });
+        
         if (res.ok) {
     showReviewSuccess('Review added! Thank you for your feedback.');
     this.reset();
