@@ -2,18 +2,18 @@
 
 Application web moderne de réservation de logements de type Airbnb, avec interface futuriste en mode néon.
 
-## 🌐 Démo en ligne
+## 🌐 Application en ligne
 
 **Site web** : https://ivane-ba.github.io/HBNB/
 
-## 🎮 Mode Démo (sans backend)
+**Backend API** : https://ivaneba.pythonanywhere.com
 
-L'application fonctionne actuellement en **mode démo** avec des données mockées (simulées). Toutes les fonctionnalités sont disponibles, mais les données ne sont pas persistées.
+L'application est **entièrement fonctionnelle** avec un backend Flask déployé sur PythonAnywhere. Toutes vos données sont persistées dans une vraie base de données SQLite.
 
-### Identifiants de connexion pour la démo :
+### Identifiants de connexion :
 
-- **Email** : `demo@hbnb.com`
-- **Mot de passe** : `demo123`
+- **Email** : `admin@hbnb.com`
+- **Mot de passe** : `12345678`
 
 ## ✨ Fonctionnalités
 
@@ -64,25 +64,20 @@ HBNB/
 
 ## 🔧 Configuration
 
-### Mode Démo (Actuel)
+### Backend déployé (Actuel)
 
-Le mode démo est activé par défaut. Les données sont stockées dans `scripts/mockData.js` et incluent :
-- 1 utilisateur de test
-- 6 logements avec images
-- 5 avis d'exemple
+L'application utilise un **backend Flask déployé sur PythonAnywhere** :
+- URL : `https://ivaneba.pythonanywhere.com`
+- Base de données : SQLite
+- API RESTful complète
 
-### Basculer vers un backend réel
+### Architecture technique
 
-Si vous souhaitez connecter un backend Flask/Python réel :
+**Frontend** : Hébergé sur GitHub Pages
+**Backend** : PythonAnywhere (Flask + SQLAlchemy)
+**Base de données** : SQLite
 
-1. **Désactiver le mode mock** : Dans `scripts/mockData.js`, modifier :
-   ```javascript
-   window.MOCK_MODE = false; // Désactive le mode démo
-   ```
-
-2. **Configurer l'URL du backend** : Mettre à jour les URLs dans les fichiers JavaScript pour pointer vers votre API.
-
-3. **Backend requis** : Une API REST avec les endpoints suivants :
+### Endpoints API disponibles :
    - `POST /api/v1/auth/login` - Connexion
    - `GET /api/v1/auth/me` - Informations utilisateur connecté
    - `GET /api/v1/places/` - Liste des places

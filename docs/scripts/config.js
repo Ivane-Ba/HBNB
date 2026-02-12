@@ -15,9 +15,7 @@
 // 🏠 Backend LOCAL (pour développement)
 // window.API_BASE_URL = 'http://127.0.0.1:5000';
 
-// ☁️ Backend DÉPLOYÉ sur Render (pour production)
-// REMPLACEZ l'URL ci-dessous par votre vraie URL Render une fois déployé
-// Exemple : window.API_BASE_URL = 'https://hbnb-backend-xxxx.onrender.com';
-window.API_BASE_URL = 'https://votre-backend.onrender.com';  // ⚠️ À MODIFIER
+// ☁️ Backend DÉPLOYÉ sur PythonAnywhere (pour production)
+window.API_BASE_URL = 'https://ivaneba.pythonanywhere.com';
 
 // Note : Si window.MOCK_MODE = true dans mockData.js, cette URL sera ignorée

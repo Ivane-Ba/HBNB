@@ -292,4 +292,4 @@ const MockAPI = {
 
 // Export pour utilisation dans les autres scripts
 window.MockAPI = MockAPI;
-window.MOCK_MODE = true; // Flag pour indiquer qu'on est en mode mock
+window.MOCK_MODE = false; // Flag pour indiquer qu'on est en mode mock - DÉSACTIVÉ pour utiliser le vrai backend
