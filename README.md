@@ -1,124 +1,118 @@
-# HBNB - Plateforme de Réservation de Logements
+# HBnB - Plateforme de Location de Logements
 
-Application web moderne de réservation de logements de type Airbnb, avec interface futuriste en mode néon.
+Projet de développement web full-stack réalisé dans le cadre de la formation Holberton School. Cette application web permet de rechercher, consulter et réserver des logements de type Airbnb.
 
-## 🌐 Application en ligne
+## Accès à l'application
 
 **Site web** : https://ivane-ba.github.io/HBNB/
 
-**Backend API** : https://ivaneba.pythonanywhere.com
+**API Backend** : https://ivaneba.pythonanywhere.com
 
-L'application est **entièrement fonctionnelle** avec un backend Flask déployé sur PythonAnywhere. Toutes vos données sont persistées dans une vraie base de données SQLite.
+**Compte de test** :
+- Email : `admin@hbnb.com`
+- Mot de passe : `12345678`
 
-### Identifiants de connexion :
+## Fonctionnalités
 
-- **Email** : `admin@hbnb.com`
-- **Mot de passe** : `12345678`
+### Authentification
+- Système de connexion sécurisé avec JWT
+- Gestion des sessions utilisateur
+- Profil utilisateur modifiable
 
-## ✨ Fonctionnalités
+### Gestion des logements
+- Liste complète des places disponibles
+- Filtre par gamme de prix avec slider interactif
+- Page de détails avec galerie d'images
+- Affichage des équipements (amenities)
 
-- ✅ **Authentification** : Connexion/Déconnexion avec gestion de session (JWT)
-- ✅ **Catalogue de places** : Affichage de tous les logements disponibles
-- ✅ **Filtre de prix** : Slider interactif pour filtrer par prix
-- ✅ **Détails des places** : Galerie d'images, informations complètes, aménités
-- ✅ **Système d'avis** : Consultation et ajout d'avis (authentification requise)
-- ✅ **Profil utilisateur** : Modification de vos informations personnelles
-- ✅ **Mode clair/sombre** : Thème personnalisable avec bouton toggle
-- ✅ **Design responsive** : Compatible mobile, tablette et desktop
+### Système d'avis
+- Consultation des avis pour chaque logement
+- Ajout d'avis (nécessite d'être connecté)
+- Notation par étoiles
 
-## 🚀 Technologies utilisées
+### Interface utilisateur
+- Design moderne avec effets glass morphism et néon
+- Mode clair/sombre
+- Interface responsive (mobile, tablette, desktop)
 
-- **Frontend** : HTML5, CSS3 (avec effets glass morphism et néon), JavaScript vanilla
-- **Images** : Hébergées sur Unsplash
-- **Hébergement** : GitHub Pages
-- **Mode démo** : API mockée (pas de backend requis)
+## Stack technique
 
-## 📂 Structure du projet
+**Frontend**
+- HTML5, CSS3, JavaScript (vanilla)
+- Hébergement : GitHub Pages
+
+**Backend**
+- Python 3.10
+- Flask + Flask-RESTX
+- SQLAlchemy (ORM)
+- JWT pour l'authentification
+- Base de données SQLite
+- Hébergement : PythonAnywhere
+
+## Structure du projet
 
 ```
-HBNB/
-├── docs/
-│   ├── index.html          # Page d'accueil avec liste des places
-│   ├── login.html          # Page de connexion
-│   ├── place.html          # Page de détails d'une place
-│   ├── profile.html        # Page de profil utilisateur
-│   ├── images/             # Logos et icônes
-│   │   ├── logo.png
-│   │   ├── icon.png
-│   │   └── ...
-│   ├── scripts/            # Scripts JavaScript
-│   │   ├── mockData.js     # Données mockées et API simulée
-│   │   ├── index.js        # Logique page d'accueil
-│   │   ├── login.js        # Logique authentification
-│   │   ├── place.js        # Logique détails place
-│   │   ├── profile.js      # Logique profil
-│   │   └── light.js        # Gestion thème clair/sombre
-│   └── styles/             # Feuilles de style CSS
-│       ├── base.css        # Styles de base
-│       ├── index.css       # Styles page d'accueil
-│       ├── login.css       # Styles page de connexion
-│       ├── place.css       # Styles page détails
-│       └── profile.css     # Styles page profil
-└── README.md
+docs/
+├── index.html              # Page d'accueil - liste des logements
+├── login.html              # Page de connexion
+├── place.html              # Détails d'un logement
+├── profile.html            # Profil utilisateur
+├── images/                 # Assets visuels
+│   ├── logo.png
+│   ├── icon.png
+│   └── icon_*.png
+├── scripts/                # Scripts JavaScript
+│   ├── config.js           # Configuration API
+│   ├── mockData.js         # Données de démonstration
+│   ├── index.js            # Logique page principale
+│   ├── login.js            # Authentification
+│   ├── place.js            # Détails logement
+│   ├── profile.js          # Gestion profil
+│   └── light.js            # Thème clair/sombre
+└── styles/                 # Feuilles de style
+    ├── base.css
+    ├── index.css
+    ├── login.css
+    ├── place.css
+    └── profile.css
 ```
 
-## 🔧 Configuration
+## Configuration et déploiement
 
-### Backend déployé (Actuel)
+### Architecture
+- **Frontend** : GitHub Pages (static hosting)
+- **Backend** : PythonAnywhere (Flask API)
+- **Base de données** : SQLite
 
-L'application utilise un **backend Flask déployé sur PythonAnywhere** :
-- URL : `https://ivaneba.pythonanywhere.com`
-- Base de données : SQLite
-- API RESTful complète
+### API Endpoints
+- `POST /api/v1/auth/login` - Authentification
+- `GET /api/v1/auth/me` - Utilisateur courant
+- `GET /api/v1/places/` - Liste des logements
+- `GET /api/v1/places/:id` - Détails logement
+- `GET /api/v1/reviews/by_place/:id` - Avis d'un logement
+- `POST /api/v1/reviews/` - Créer un avis
+- `GET /api/v1/users/:id` - Profil utilisateur
+- `PUT /api/v1/users/:id` - Modifier profil
 
-### Architecture technique
+## Personnalisation
 
-**Frontend** : Hébergé sur GitHub Pages
-**Backend** : PythonAnywhere (Flask + SQLAlchemy)
-**Base de données** : SQLite
+### Thème visuel
+Les variables CSS principales sont dans `docs/styles/base.css` :
+- Couleurs et dégradés
+- Effets glass morphism
+- Animations néon
 
-### Endpoints API disponibles :
-   - `POST /api/v1/auth/login` - Connexion
-   - `GET /api/v1/auth/me` - Informations utilisateur connecté
-   - `GET /api/v1/places/` - Liste des places
-   - `GET /api/v1/places/:id` - Détails d'une place
-   - `GET /api/v1/reviews/by_place/:id` - Avis d'une place
-   - `POST /api/v1/reviews/` - Ajouter un avis
-   - `GET /api/v1/users/:id` - Profil utilisateur
-   - `PUT /api/v1/users/:id` - Modifier profil utilisateur
+### Mode démo
+Le fichier `docs/scripts/mockData.js` contient des données de test qui peuvent être utilisées sans backend actif. Pour basculer entre le mode démo et le backend réel, modifier la variable `MOCK_MODE` dans ce fichier.
 
-## 🎨 Personnalisation
+## Compatibilité
 
-### Modifier les données de démo
+- Navigateurs modernes (Chrome, Firefox, Safari, Edge)
+- Responsive design (mobile, tablette, desktop)
+- Testé sur iOS et Android
 
-Éditez le fichier `docs/scripts/mockData.js` pour :
-- Ajouter/modifier des logements
-- Changer les utilisateurs de test
-- Ajouter des avis
+## Auteur
 
-### Modifier le thème
+Ivane Bagashvili - Projet Holberton School 2025
 
-Les variables CSS sont définies dans `docs/styles/base.css` :
-- Couleurs principales
-- Effets néon et glass morphism
-- Espacements et typographie
-
-## 📱 Compatibilité
-
-- ✅ Chrome, Firefox, Safari, Edge (dernières versions)
-- ✅ Mobile responsive (iOS & Android)
-- ✅ Tablettes
-- ✅ Desktop
-
-## 🐛 Problèmes connus
-
-- En mode démo, les données sont réinitialisées à chaque rechargement de page
-- Les images des places utilisent Unsplash (connexion internet requise)
-
-## 📝 Licence
-
-© 2025 HBNB. Tous droits réservés.
-
-## 👨‍💻 Auteur
-
-Projet développé dans le cadre de la formation Holberton School.
+GitHub : [IvaneHo](https://github.com/IvaneHo)
