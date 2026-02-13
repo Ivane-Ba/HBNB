@@ -6,8 +6,6 @@ Projet de développement web full-stack réalisé dans le cadre de la formation 
 
 **Site web** : https://ivane-ba.github.io/HBNB/
 
-**API Backend** : https://ivaneba.pythonanywhere.com
-
 **Compte de test** :
 - Email : `admin@hbnb.com`
 - Mot de passe : `12345678`
@@ -115,4 +113,4 @@ Le fichier `docs/scripts/mockData.js` contient des données de test qui peuvent 
 
 Ivane Bagashvili - Projet Holberton School 2025
 
-GitHub : [IvaneHo](https://github.com/IvaneHo)
+GitHub : [Ivane-Ba](https://github.com/Ivane-Ba)
